@@ -1,0 +1,79 @@
+# Copyright (C) 2016 and later: Unicode, Inc. and others.
+# License & terms of use: http://www.unicode.org/copyright.html
+
+# ICU CMake Package Configuration File
+
+@PACKAGE_INIT@
+
+set(ICU_VERSION "@PROJECT_VERSION@")
+set(ICU_VERSION_MAJOR "@ICU_VERSION_MAJOR@")
+set(ICU_VERSION_MINOR "@ICU_VERSION_MINOR@")
+set(ICU_VERSION_PATCH "@ICU_VERSION_PATCH@")
+
+# Include the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/ICUTargets.cmake")
+
+# Define convenience variables
+set(ICU_INCLUDE_DIRS "@PACKAGE_ICU_INSTALL_INCLUDEDIR@")
+set(ICU_LIBRARY_DIRS "@PACKAGE_ICU_INSTALL_LIBDIR@")
+
+# Define library variables for backward compatibility
+if(TARGET ICU::uc)
+    set(ICU_UC_LIBRARY ICU::uc)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::uc)
+endif()
+
+if(TARGET ICU::i18n)
+    set(ICU_I18N_LIBRARY ICU::i18n)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::i18n)
+endif()
+
+if(TARGET ICU::io)
+    set(ICU_IO_LIBRARY ICU::io)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::io)
+endif()
+
+if(TARGET ICU::lx)
+    set(ICU_LX_LIBRARY ICU::lx)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::lx)
+endif()
+
+if(TARGET ICU::tu)
+    set(ICU_TU_LIBRARY ICU::tu)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::tu)
+endif()
+
+if(TARGET ICU::data)
+    set(ICU_DATA_LIBRARY ICU::data)
+    set(ICU_LIBRARIES ${ICU_LIBRARIES} ICU::data)
+endif()
+
+# Static library targets
+if(TARGET ICU::uc_static)
+    set(ICU_UC_STATIC_LIBRARY ICU::uc_static)
+endif()
+
+if(TARGET ICU::i18n_static)
+    set(ICU_I18N_STATIC_LIBRARY ICU::i18n_static)
+endif()
+
+if(TARGET ICU::io_static)
+    set(ICU_IO_STATIC_LIBRARY ICU::io_static)
+endif()
+
+if(TARGET ICU::lx_static)
+    set(ICU_LX_STATIC_LIBRARY ICU::lx_static)
+endif()
+
+if(TARGET ICU::tu_static)
+    set(ICU_TU_STATIC_LIBRARY ICU::tu_static)
+endif()
+
+if(TARGET ICU::data_static)
+    set(ICU_DATA_STATIC_LIBRARY ICU::data_static)
+endif()
+
+# Set found flag
+set(ICU_FOUND TRUE)
+
+check_required_components(ICU)
